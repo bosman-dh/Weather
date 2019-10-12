@@ -21,6 +21,7 @@ namespace Weather.Menu
                 Console.WriteLine("Stations:");
                 Console.WriteLine("---------");
                 weatherDB.Stations.Select(x => x.Name).OrderBy(x => x).ToList().ForEach(x => Console.WriteLine(x));
+
                 Console.WriteLine("");
                 Console.WriteLine("Date range:");
                 Console.WriteLine("-----------");

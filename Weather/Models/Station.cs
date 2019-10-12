@@ -10,12 +10,13 @@ namespace Weather.Models
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
-        public float Elevation { get; set; }
+        public float? Latitude { get; set; }
+        public float? Longitude { get; set; }
+        public float? Elevation { get; set; }
 
         public virtual ICollection<Data> Datas { get; set; }
 
+        #region Overrides
         public override bool Equals(object obj) //need to Distinct Collection<Station>
         {
             if (obj is Station)
@@ -33,5 +34,6 @@ namespace Weather.Models
         {
             return this.Id.GetHashCode();
         }
+        #endregion
     }
 }

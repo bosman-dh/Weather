@@ -28,7 +28,7 @@ namespace Weather.Menu
                     "JOIN Data AS D " +
                     "ON S.Id = D.StationId " +
                     "GROUP BY S.Name, MONTH(D.Date) " +
-                    "HAVING AVG(D.Precipitation) < 1.8 " +
+                    "HAVING AVG(D.Precipitation) < 2 " +
                     "ORDER BY MonthAvgTemp DESC, MonthAvgPrecipitation "
                     ).FirstOrDefault();
 
@@ -43,14 +43,19 @@ namespace Weather.Menu
                     ).FirstOrDefault();
             }
 
-            Console.WriteLine($"Your best place for active holiday is {activeHoliday.Name} in {activeHoliday.Month}");
-            Console.WriteLine($"    with the smallest avarage daily precipitation {Math.Round(activeHoliday.MonthAvgPrecipitation, 2)}mm");
-            Console.WriteLine($"    and >10 Celcius average daily temperature ({Math.Round(activeHoliday.MonthAvgTemp,2)}C)");
-            Console.WriteLine("");
-            Console.WriteLine($"Your best place for relaxing holiday is {relaxingHoliday.Name} in {relaxingHoliday.Month}");
-            Console.WriteLine($"    with the biggest average daily temperature {Math.Round(relaxingHoliday.MonthAvgTemp,2)}C");
-            Console.WriteLine($"    and <1.8mm average daily precipitation ({Math.Round(relaxingHoliday.MonthAvgPrecipitation,2)}mm)");
-
+            if (activeHoliday!=null)
+            {
+                Console.WriteLine($"Best place for active holiday is area weather station {activeHoliday.Name} in {activeHoliday.Month}");
+                Console.WriteLine($"    with the smallest avarage daily precipitation {Math.Round(activeHoliday.MonthAvgPrecipitation, 2)}mm");
+                Console.WriteLine($"    and >10C average daily temperature ({Math.Round(activeHoliday.MonthAvgTemp, 2)}C)");
+                Console.WriteLine("");
+            }
+            if (relaxingHoliday!=null)
+            {
+                Console.WriteLine($"Best place for relaxing holiday is area weather station {relaxingHoliday.Name} in {relaxingHoliday.Month}");
+                Console.WriteLine($"    with the biggest average daily temperature {Math.Round(relaxingHoliday.MonthAvgTemp, 2)}C");
+                Console.WriteLine($"    and <2mm average daily precipitation ({Math.Round(relaxingHoliday.MonthAvgPrecipitation, 2)}mm)");
+            }
             Console.WriteLine("");
             Console.WriteLine("-Press any key-");
             Console.ReadKey();

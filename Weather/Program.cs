@@ -14,7 +14,13 @@ namespace Weather
     {
         static void Main(string[] args)
         {
-            SelectionMenu homeMenu = new SelectionMenu(new List<IElement>() { new ElementImportDb(), new ElementListStations(), new ElementBestHolidayPlace(), new ElementExit() });
+            SelectionMenu homeMenu = new SelectionMenu(new List<IElement>()
+            {
+                new ElementImportDb(),
+                new ElementListStations(),
+                new ElementBestHolidayPlace(),
+                new ElementExit()
+            });
 
             homeMenu.Show();
         }

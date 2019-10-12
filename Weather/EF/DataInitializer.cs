@@ -18,7 +18,6 @@ namespace Weather.EF
             #region Import fields
             StationFileImporter stationFileImporter = new StationFileImporter(@"..\..\..\import.csv");
             DataFileImporter dataFileImporter = new DataFileImporter(@"..\..\..\import.csv");
-            //List<FileImporter> lfi = new List<FileImporter>() { sfi, dfi };   //cannot use List<FileImporter> to iteration, because FileImport return ICollection<string>, but StationFileImporter:FileImport and DataFileImporter:FileImport return void, so override is impossible; Other side ICollection is needed due to yield return 
             List<IDuplicateDeleter> duplicateDeleters = new List<IDuplicateDeleter>() { stationFileImporter, dataFileImporter };
             List<ICollectionImporter> collectionImporters = new List<ICollectionImporter>() { stationFileImporter, dataFileImporter };
             #endregion
@@ -31,6 +30,7 @@ namespace Weather.EF
 
             #endregion
 
+            #region Import
             //imports from file to collections
             foreach (var item in collectionImporters)
             {
@@ -42,15 +42,16 @@ namespace Weather.EF
             {
                 item.DeleteDuplicates();
             }
+            #endregion
 
-            //swe.DbExport();
-            //dwe.DbExport();
-
+            #region Export
             //adds collections to Db
             foreach (var item in weatherExporters)
             {
                 item.DbExport();
             }
+            #endregion
+
 
             base.Seed(context);
         }

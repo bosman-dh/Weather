@@ -20,7 +20,7 @@ namespace Weather.Models
 
         public virtual Station Station { get; set; }
 
-
+        #region Overrides
         public override bool Equals(object obj) //need to Distinct Collection<Data>
         {
             if (obj is Data)
@@ -38,5 +38,6 @@ namespace Weather.Models
         {
             return this.Date.ToString().GetHashCode();
         }
+        #endregion
     }
 }
